@@ -11,12 +11,16 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * The persistent class for the dobavljac database table.
  * 
  */
 @Entity
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name="Dobavljac.findAll", query="SELECT d FROM Dobavljac d")
 public class Dobavljac implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -33,6 +37,7 @@ public class Dobavljac implements Serializable {
 	private String naziv;
 
 	//bi-directional many-to-one association to Porudzbina
+	@JsonIgnore
 	@OneToMany(mappedBy = "dobavljac")
 	private List<Porudzbina> porudzbinas;
 
