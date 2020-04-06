@@ -17,18 +17,22 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * The persistent class for the porudzbina database table.
  * 
  */
 @Entity
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name="Porudzbina.findAll", query="SELECT p FROM Porudzbina p")
 public class Porudzbina implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PORUDZBINA_ID_GENERATOR", sequenceName="PORUDZBINA_SEQ")
+	@SequenceGenerator(name = "PORUDZBINA_ID_GENERATOR", sequenceName = "PORUDZBINA_SEQ", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PORUDZBINA_ID_GENERATOR")
 	private Integer id;
 
@@ -49,6 +53,7 @@ public class Porudzbina implements Serializable {
 
 	//bi-directional many-to-one association to StavkaPorudzbine
 	@OneToMany(mappedBy = "porudzbina")
+	@JsonIgnore
 	private List<StavkaPorudzbine> stavkaPorudzbines;
 
 	public Porudzbina() {

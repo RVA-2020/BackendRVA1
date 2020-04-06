@@ -14,19 +14,22 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * The persistent class for the stavka_porudzbine database table.
  * 
  */
 @Entity
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Table(name="stavka_porudzbine")
 @NamedQuery(name="StavkaPorudzbine.findAll", query="SELECT s FROM StavkaPorudzbine s")
 public class StavkaPorudzbine implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="STAVKA_PORUDZBINE_ID_GENERATOR", sequenceName="STAVKA_PORUDZBINE_SEQ")
+	@SequenceGenerator(name = "STAVKA_PORUDZBINE_ID_GENERATOR", sequenceName = "STAVKA_PORUDZBINE_SEQ", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="STAVKA_PORUDZBINE_ID_GENERATOR")
 	private Integer id;
 

@@ -51,6 +51,8 @@ INSERT INTO "porudzbina"("id", "datum", "dobavljac", "isporuceno", "iznos", "pla
 VALUES (nextval('porudzbina_seq'), to_date('01.03.2019.', 'dd.mm.yyyy.'), 4, to_date('22.06.2019.', 'dd.mm.yyyy.'), 15000, true);
 INSERT INTO "porudzbina"("id", "datum", "dobavljac", "isporuceno", "iznos", "placeno")
 VALUES (nextval('porudzbina_seq'), to_date('01.07.2019.', 'dd.mm.yyyy.'), 4, to_date('01.10.2019.', 'dd.mm.yyyy.'), 800, true);
+INSERT INTO "porudzbina"("id", "datum", "dobavljac", "isporuceno", "iznos", "placeno")
+VALUES (-100, to_date('01.07.2019.', 'dd.mm.yyyy.'), 4, to_date('01.10.2019.', 'dd.mm.yyyy.'), 800, true);
 
 INSERT INTO "stavka_porudzbine"("id", "porudzbina", "redni_broj", "artikl", "kolicina", "jedinica_mere", "cena")
 VALUES (nextval('stavka_porudzbine_seq'), 1, 1, 1, 20, 'komad', 100);
@@ -58,6 +60,8 @@ INSERT INTO "stavka_porudzbine"("id", "porudzbina", "redni_broj", "artikl", "kol
 VALUES (nextval('stavka_porudzbine_seq'), 1, 2, 2, 30, 'komad', 150);
 INSERT INTO "stavka_porudzbine"("id", "porudzbina", "redni_broj", "artikl", "kolicina", "jedinica_mere", "cena")
 VALUES (nextval('stavka_porudzbine_seq'), 1, 3, 3, 15, 'komad', 80);
+INSERT INTO "stavka_porudzbine"("id", "porudzbina", "redni_broj", "artikl", "kolicina", "jedinica_mere", "cena")
+VALUES (-100, 1, 3, 3, 15, 'komad', 80);
 
 INSERT INTO "stavka_porudzbine"("id", "porudzbina", "redni_broj", "artikl", "kolicina", "jedinica_mere", "cena")
 VALUES (nextval('stavka_porudzbine_seq'), 2, 1, 4, 30, 'komad', 120);
