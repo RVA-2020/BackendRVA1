@@ -2,6 +2,8 @@ package rva.ctrls;
 
 import java.util.Collection;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,10 +50,15 @@ public class DobavljacRestController {
 	}
 
 	@ApiOperation(value = "Briše dobavljača iz baze podataka čiji je id vrednost prosleđena kao path varijabla")
+	@Transactional
 	@DeleteMapping("dobavljac/{id}")
 	public ResponseEntity<Dobavljac> deleteDobavljac(@PathVariable("id") Integer id) {
 		if (!dobavljacRepository.existsById(id))
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		jdbcTemplate.execute(
+				"delete from stavka_porudzbine where porudzbina in (select id from porudzbina where dobavljac = " + id
+						+ ");");
+		jdbcTemplate.execute("delete from porudzbina where dobavljac = " + id);
 		dobavljacRepository.deleteById(id);
 		if (id == -100)
 			jdbcTemplate.execute(
